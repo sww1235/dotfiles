@@ -33,4 +33,23 @@ set ttimeout		" time out for key codes
 set ttimeoutlen		" wait up to 100ms after Esc for special key
 
 set scrolloff=5		" always show context lines around cursor. will scroll text
-""
+
+if has('reltime') " need reltime to avoid vim hanging when typing search pattern
+	set incsearch
+endif
+
+" no octal number formats
+set nrformats-=octal
+
+" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
+" from default vimrc
+
+if has('win32')
+	set guioptions-=t
+endif
+
+
+" enable mouse support if supported
+if has('mouse')
+	set mouse=a
+endif
