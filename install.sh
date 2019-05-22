@@ -15,6 +15,11 @@ do
 		shift # remove -h or --help from processing
 		exit(0)
 		;;
+	-l|--list)
+		echo "vim\nbash"
+		shift # remove -l or --list from processing
+		exit(0)
+		;;
 	vim)
 		INSTALL_VIM=1
 		shift # remove vim from processing
@@ -22,6 +27,11 @@ do
 	bash)
 		INSTALL_BASH=1
 		shift # remove bash from processing
+		;;
+	all)
+		INSTALL_VIM=1
+		INSTALL_BASH=1
+		shift # remove all from processing
 		;;
 	*)
 		echo "Argument $1 is not recognized"
