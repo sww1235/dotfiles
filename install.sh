@@ -13,12 +13,12 @@ do
 	-h|--help)
 		echo "type -l or --list for list of parts to install or \"all\" to install all parts"
 		shift # remove -h or --help from processing
-		exit(0)
+		exit
 		;;
 	-l|--list)
 		echo "vim\nbash"
 		shift # remove -l or --list from processing
-		exit(0)
+		exit
 		;;
 	vim)
 		INSTALL_VIM=1
@@ -39,5 +39,19 @@ do
 		;;
 	esac
 done
+scriptLocation="$(pwd)"
+
+echo $scriptLocation
+
+if [ "$INSTALL_VIM" -eq 1 ]; then
+	ln -sv "$scriptlocation/.vimrc" "$HOME"
+fi
+
+if [ "$INSTALL_BASH" -eq 1 ]; then
+	ln -s bash/.aliases ~/.aliases
+	ln -s bash/.bash_profile ~/.bash_profile
+	ln -s bash/.exports ~/.exports
+	ln -s .profile ~/.profile
+fi
 
 
