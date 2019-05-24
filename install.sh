@@ -46,10 +46,10 @@ if [ "$INSTALL_VIM" -eq 1 ]; then
 fi
 
 if [ "$INSTALL_BASH" -eq 1 ]; then
-	ln -s bash/.aliases ~/.aliases
-	ln -s bash/.bash_profile ~/.bash_profile
-	ln -s bash/.exports ~/.exports
-	ln -s .profile ~/.profile
+	ln -s "$PWD/bash/.aliases" "$HOME"
+	ln -s "$PWD/bash/.bash_profile ~/.bash_profile" "$HOME"
+	ln -s "$PWD/bash/.exports ~/.exports" "$HOME"
+	ln -s "$PWD/.profile ~/.profile" "$HOME"
 fi
 
 
