@@ -39,12 +39,10 @@ do
 		;;
 	esac
 done
-scriptLocation="$(pwd)"
-
-echo $scriptLocation
 
 if [ "$INSTALL_VIM" -eq 1 ]; then
-	ln -sv "$scriptlocation/.vimrc" "$HOME"
+	ln -sv "$PWD/.vimrc" "$HOME"
+	ln -sv "$PWD/.vim" "$HOME"
 fi
 
 if [ "$INSTALL_BASH" -eq 1 ]; then
