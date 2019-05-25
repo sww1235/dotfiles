@@ -13,6 +13,11 @@ silent! while 0
 	set nocompatible
 silent! endwhile
 
+" no defaults.vim
+unlet! skip_defaults_vim
+
+" Allow backspacing over everything in insert mode.
+set backspace=indent,eol,start
 
 " basic behavior
 
@@ -30,9 +35,11 @@ set showcmd		" display incomplete commands
 set wildmenu		" display completion matches in status line (part of Vim, not Vi)
 
 set ttimeout		" time out for key codes
-set ttimeoutlen		" wait up to 100ms after Esc for special key
+set ttimeoutlen=100		" wait up to 100ms after Esc for special key
 
 set scrolloff=5		" always show context lines around cursor. will scroll text
+
+
 
 if has('reltime') " need reltime to avoid vim hanging when typing search pattern
 	set incsearch
