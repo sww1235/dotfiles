@@ -1,5 +1,7 @@
 # dotfiles
-test of dotfiles repo
+my dotfiles
+
+remember to clone with `--recurse-submodules -j8` to download vim packages
 
 
 ## NOTES
