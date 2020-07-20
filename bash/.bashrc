@@ -16,3 +16,7 @@ eval "$(thefuck --alias)"
 
 [ -f $HOME/.aliases ] && source $HOME/.aliases
 [ -f $HOME/.aliases-mac ] && source $HOME/.aliases-mac
+
+# source ssh-agent file
+
+[ -f $HOME/.ssh/ssh-agent-env ] && source $HOME/.ssh/ssh-agent-env
