@@ -4,6 +4,36 @@
 INSTALL_VIM=0
 INSTALL_BASH=0
 
+
+# install functions
+
+install_vim (){
+	ln -sv "$PWD/.vimrc" "$HOME"
+	ln -sv "$PWD/.vim" "$HOME"
+
+
+}
+
+install_bash (){
+	# from https://stackoverflow.com/a/27875395
+	echo -n "Check to make sure old .bashrc and .bash_profile are good to overwrite (y/n)? "
+	old_stty_cfg=$(stty -g)
+	stty raw -echo ; answer=$(head -c 1) ; stty $old_stty_cfg # Careful playing with stty
+	if echo "$answer" | grep -iq "^y" ;then
+    		#mv "$HOME/.bash_profile" "$HOME/.bash_profile.old"
+		#mv "$HOME/.bashrc" "$HOME/.bashrc.old"
+		ln -sf "$PWD/bash/.aliases" "$HOME"
+		ln -sf "$PWD/bash/.bash_profile" "$HOME"
+		ln -sf "$PWD/bash/.exports" "$HOME"
+		ln -sf "$PWD/bash/.bashrc" "$HOME"
+		#ln -s "$PWD/.profile ~/.profile" "$HOME"
+	else
+    		return
+	fi
+
+
+}
+
 # loop through arguments and process them
 # ideas from https://pretzelhands.com/posts/command-line-flags
 
@@ -41,15 +71,11 @@ do
 done
 
 if [ "$INSTALL_VIM" -eq 1 ]; then
-	ln -sv "$PWD/.vimrc" "$HOME"
-	ln -sv "$PWD/.vim" "$HOME"
+	install_vim
 fi
 
 if [ "$INSTALL_BASH" -eq 1 ]; then
-	ln -s "$PWD/bash/.aliases" "$HOME"
-	ln -s "$PWD/bash/.bash_profile ~/.bash_profile" "$HOME"
-	ln -s "$PWD/bash/.exports ~/.exports" "$HOME"
-	ln -s "$PWD/.profile ~/.profile" "$HOME"
+	install_bash
 fi
 
 
