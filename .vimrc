@@ -38,6 +38,9 @@ set ttimeoutlen=100	" wait up to 100ms after Esc for special key
 
 set scrolloff=5		" always show context lines around cursor. will scroll text
 
+" set colorscheme to my own
+colorscheme toxic
+
 " Setup tabstop and autoindent
 
 " Only do this part when Vim was compiled with the +eval feature.
@@ -49,6 +52,8 @@ if has("autocmd")
   " Also load indent files, to automatically do language-dependent indenting.
   " Revert with ":filetype off".
   filetype plugin indent on
+  set foldmethod=syntax
+  set nofoldenable
 
   " Put these in an autocmd group, so that you can revert them with:
   " ":augroup vimStartup | au! | augroup END"
