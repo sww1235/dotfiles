@@ -12,3 +12,11 @@ so I can get nvidia cards working in void linux
 ## VIM specifics
 
 use `.vim/after/` directory to not override defaults for things like filetype plugins etc 
+
+## SHELL specifics
+
+`.bash_profile` is not used, and moved if detected.
+
+All login shell configuration is  in `.profile` (or equivalent file for `zsh`)
+
+All interactive shell configuration is in `.rc` files under the nominative directory of the shell.

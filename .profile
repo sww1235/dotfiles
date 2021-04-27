@@ -1,18 +1,38 @@
-# general non bash specific info
+#! /bin/sh
 
-# custom prompt
+# from https://unix.stackexchange.com/a/72475/81810
 
-export PS1="Ω:"
-
-# Source other files
-. ~/.aliases
-. ~/.exports
-
-# OS specific files
-
-# check for macos 10
-if [$(uname) -eq "Darwin"]; then
-	. ~/.aliases-mac
-	. ~/.exports-mac	
+if [ -n "$ZSH_VERSION" ]; then
+	PROFILE_SHELL=zsh
+elif [ -n "$BASH_VERSION" ]; then
+	PROFILE_SHELL=bash
+elif [ -n "$KSH_VERSION"]; then
+	PROFILE_SHELL=ksh
+elif [ -n "$FCEDIT"]; then
+	PROFILE_SHELL=ksh
+elif [ -n "$PS3"]; then
+	PROFILE_SHELL=unknown
+else
+	PROFILE_SHELL=sh
 fi
+
+export PAGER=less
+
+if [ "$PROFILE_SHELL" = "sh" ]; then
+
+	# set ENV to a file invoked each time sh is started for interactive use.
+	ENV=$HOME/.shrc; export ENV
+	. $HOME/.aliases.sh 
+
+	# Let sh(1) know it's at home, despite /home being a symlink.
+	if [ "$PWD" != "$HOME" ] && [ "$PWD" -ef "$HOME" ] ; then cd ; fi
+
+
+elif [ "$PROFILE_SHELL" = "bash" ]; then
+	
+	. $HOME/.bashrc
+	. $HOME/.aliases.sh 
+fi
+
+
 

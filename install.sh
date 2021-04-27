@@ -5,6 +5,20 @@ INSTALL_VIM=0
 INSTALL_BASH=0
 
 
+platform='unknown'
+
+detect_os (){
+	unamestr=$(uname)
+
+	if [ "$unamestr" = 'Linux' ]; then
+		platform='linux'
+	elif [ "$unamestr" = 'FreeBSD' ]; then
+		platform='freebsd'
+	elif [ "$unamestr" = 'Darwin' ]; then
+		platform='mac-os'
+	fi
+}
+
 # install functions
 
 install_vim (){
@@ -14,68 +28,116 @@ install_vim (){
 
 }
 
-install_bash (){
-	# from https://stackoverflow.com/a/27875395
-	echo -n "Check to make sure old .bashrc and .bash_profile are good to overwrite (y/n)? "
-	old_stty_cfg=$(stty -g)
-	stty raw -echo ; answer=$(head -c 1) ; stty $old_stty_cfg # Careful playing with stty
-	if echo "$answer" | grep -iq "^y" ;then
-    		#mv "$HOME/.bash_profile" "$HOME/.bash_profile.old"
-		#mv "$HOME/.bashrc" "$HOME/.bashrc.old"
-		ln -sf "$PWD/bash/.aliases" "$HOME"
-		ln -sf "$PWD/bash/.bash_profile" "$HOME"
-		ln -sf "$PWD/bash/.exports" "$HOME"
-		ln -sf "$PWD/bash/.bashrc" "$HOME"
-		#ln -s "$PWD/.profile ~/.profile" "$HOME"
-	else
-    		return
+install_profile (){
+	# check for existing .profile first (not symlink)
+	if [ -f "$HOME/.profile" ] && [ ! -h "$HOME/.profile" ]; then
+		# check for old .profile.old file
+		if [ -f "$HOME/.profile.old" ]; then
+			echo "both $HOME/.profile and $HOME/.profile.old exist and are not symlinks.\
+				Delete the un-needed files and rerun install script."
+			return 1
+		fi
+		# if .profile.old doesn't exist, then copy .profile to .profile.old
+		mv "$HOME/.profile" "$HOME/.profile.old"
 	fi
+	# force create symlink
+	ln -sf "$PWD/sh/.profile" "$HOME"
+	return 0
+}
+
+install_bash (){
+	install_profile
+	if [ "$?" -ne 0 ]; then
+		echo ".profile failed to install. Fix issue and rerun install script."
+		return 1
+	fi
+	# bash will use .profile if .bash_profile doesn't exist. We always want to use .profile
+	if [ -f "$HOME/.bash_profile" ]; then
+		mv "$HOME/.bash_profile" "$HOME/.bash_profile.old"
+	fi
+		
+	ln -sf "$PWD/bash/.bashrc" "$HOME"
+
+	ln -sf "$PWD/bash/.aliases.sh" "$HOME"
+	if [ "$platform" = 'mac-os' ]; then
+
+		ln -sf "$PWD/bash/.aliases-mac.sh" "$HOME"
+		ln -sf "$PWD/bash/.exports-mac.sh" "$HOME"
+	fi
+	if [ "$platform" = 'linux' ]; then
+
+		ln -sf "$PWD/bash/.aliases-linux.sh" "$HOME"
+		ln -sf "$PWD/bash/.exports-linux.sh" "$HOME"
+	fi
+	if [ "$platform" = 'freebsd' ]; then
+
+		ln -sf "$PWD/bash/.aliases-freebsd.sh" "$HOME"
+		ln -sf "$PWD/bash/.exports-freebsd.sh" "$HOME"
+	fi
+
+	return 0
 
 
 }
 
-# loop through arguments and process them
-# ideas from https://pretzelhands.com/posts/command-line-flags
+install_sh (){
+	install_profile
+	if [ "$?" -ne 0 ]; then
+		echo ".profile failed to install. Fix issue and rerun install script."
+		return 1
+	fi
+	# check for existing .shrc first (not symlink)
+	if [ -f "$HOME/.shrc" ] && [ ! -h "$HOME/.shrc" ]; then
+		# check for old .shrc.old file
+		if [ -f "$HOME/.shrc.old" ]; then
+			echo "both $HOME/.shrc and $HOME/.shrc.old exist and are not symlinks.\
+				Delete the un-needed files and rerun install script."
+			return 1
+		fi
+		# if .shrc.old doesn't exist, then copy .shrc to .shrc.old
+		mv "$HOME/.shrc" "$HOME/.shrc.old"
+	fi
+	# force create symlink
+	ln -sf "$PWD/sh/.shrc" "$HOME"
 
-for arg in "$@" # all arguments except $0
-do
-	case $arg in
-	-h|--help)
-		echo "type -l or --list for list of parts to install or \"all\" to install all parts"
-		shift # remove -h or --help from processing
-		exit
-		;;
-	-l|--list)
-		echo "vim\nbash"
-		shift # remove -l or --list from processing
-		exit
-		;;
-	vim)
-		INSTALL_VIM=1
-		shift # remove vim from processing
-		;;
-	bash)
-		INSTALL_BASH=1
-		shift # remove bash from processing
-		;;
-	all)
-		INSTALL_VIM=1
-		INSTALL_BASH=1
-		shift # remove all from processing
-		;;
-	*)
-		echo "Argument $1 is not recognized"
-		shift
-		;;
-	esac
-done
+	# link other useful files
+	ln -sf "$PWD/sh/.aliases.sh" "$HOME"
+	if [ "$platform" = 'mac-os' ]; then
 
-if [ "$INSTALL_VIM" -eq 1 ]; then
+		ln -sf "$PWD/sh/.aliases-mac.sh" "$HOME"
+		ln -sf "$PWD/sh/.exports-mac.sh" "$HOME"
+	fi
+	if [ "$platform" = 'linux' ]; then
+
+		ln -sf "$PWD/sh/.aliases-linux.sh" "$HOME"
+		ln -sf "$PWD/sh/.exports-linux.sh" "$HOME"
+	fi
+	if [ "$platform" = 'freebsd' ]; then
+
+		ln -sf "$PWD/sh/.aliases-freebsd.sh" "$HOME"
+		ln -sf "$PWD/sh/.exports-freebsd.sh" "$HOME"
+	fi
+
+	return 0
+}
+
+if [ "$platform" = 'linux' ]; then
+	echo "Installing bash and vim dotfiles for Linux"
 	install_vim
-fi
-
-if [ "$INSTALL_BASH" -eq 1 ]; then
 	install_bash
+	exit 0
+elif [ "$platform" = 'freebsd' ]; then
+	echo "Installing sh and vim dotfiles for FreeBSD"
+	install_vim
+	install_sh
+	exit 0
+elif [ "$platform" = 'mac-os' ]; then
+	echo "Installing bash and vim dotfiles for MacOS"
+	install_vim
+	install_bash
+	exit 0
+else
+	echo "Platform not recognized. Run uname and edit this script with the output"
+	exit 1
 fi
-
 
