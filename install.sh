@@ -1,10 +1,6 @@
 #! /bin/sh
 # read command line arguments to determine which parts to install, or all or help
 
-INSTALL_VIM=0
-INSTALL_BASH=0
-
-
 platform='unknown'
 
 detect_os (){

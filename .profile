@@ -6,11 +6,11 @@ if [ -n "$ZSH_VERSION" ]; then
 	PROFILE_SHELL=zsh
 elif [ -n "$BASH_VERSION" ]; then
 	PROFILE_SHELL=bash
-elif [ -n "$KSH_VERSION"]; then
+elif [ -n "$KSH_VERSION" ]; then
 	PROFILE_SHELL=ksh
-elif [ -n "$FCEDIT"]; then
+elif [ -n "$FCEDIT" ]; then
 	PROFILE_SHELL=ksh
-elif [ -n "$PS3"]; then
+elif [ -n "$PS3" ]; then
 	PROFILE_SHELL=unknown
 else
 	PROFILE_SHELL=sh

@@ -1,21 +1,21 @@
 #!/bin/bash
 
-if [ -e "$HOME/.aliases-mac" ]; then
-	. "$HOME/.aliases-mac"
+if [ -e "$HOME/.aliases-mac.sh" ]; then
+	. "$HOME/.aliases-mac.sh"
 fi
-if [ -e "$HOME/.exports-mac" ]; then
-	. "$HOME/.exports-mac"
+if [ -e "$HOME/.exports-mac.sh" ]; then
+	. "$HOME/.exports-mac.sh"
 fi
-if [ -e "$HOME/.aliases-linux" ]; then
-	. "$HOME/.aliases-linux"
+if [ -e "$HOME/.aliases-linux.sh" ]; then
+	. "$HOME/.aliases-linux.sh"
 fi
-if [ -e "$HOME/.exports-linux" ]; then
-	. "$HOME/.exports-linux"
+if [ -e "$HOME/.exports-linux.sh" ]; then
+	. "$HOME/.exports-linux.sh"
 fi
-if [ -e "$HOME/.aliases-freebsd" ]; then
-	. "$HOME/.aliases-freebsd"
+if [ -e "$HOME/.aliases-freebsd.sh" ]; then
+	. "$HOME/.aliases-freebsd.sh"
 fi
-if [ -e "$HOME/.exports-freebsd" ]; then
-	. "$HOME/.exports-freebsd"
+if [ -e "$HOME/.exports-freebsd.sh" ]; then
+	. "$HOME/.exports-freebsd.sh"
 fi
 
