@@ -117,6 +117,8 @@ install_sh (){
 	return 0
 }
 
+detect_os
+
 if [ "$platform" = 'linux' ]; then
 	echo "Installing bash and vim dotfiles for Linux"
 	install_vim
