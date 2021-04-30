@@ -37,7 +37,7 @@ install_profile (){
 		mv "$HOME/.profile" "$HOME/.profile.old"
 	fi
 	# force create symlink
-	ln -sf "$PWD/sh/.profile" "$HOME"
+	ln -sf "$PWD/.profile" "$HOME"
 	return 0
 }
 
