@@ -18,8 +18,16 @@ detect_os (){
 # install functions
 
 install_vim (){
-	ln -sv "$PWD/.vimrc" "$HOME"
-	ln -sv "$PWD/.vim" "$HOME"
+	if [ -f "$HOME/.vimrc" ] && [ ! -h "$HOME/.vimrc" ]; then
+		if [ -f "$HOME/.vimrc" ]; then
+			echo "both $HOME/.vimrc and $HOME/.vimrc.old exist and are not symlinks.\
+				Delete the un-needed files and rerun install script."
+			return 1
+		fi
+		mv "$HOME/.vimrc" "$HOME/.vimrc.old"
+	fi
+	ln -sf "$PWD/.vimrc" "$HOME"
+	ln -sf "$PWD/.vim" "$HOME"
 
 
 }
