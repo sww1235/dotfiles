@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/bash
 
 # CONFIG VARIABLES
 BUS_ID=0000:01:00.0
@@ -22,7 +22,7 @@ calculate_display() {
 	local num=-1
 	local path="/tmp/.X11-unix"
 	
-	while [[ true ]]; do
+	while true ; do
 		num=$((num + 1))
 		if [[ -S "$path/X$num" ]]; then
 			continue
@@ -106,7 +106,8 @@ run_x() {
 	local wm="$1"
 
 	calculate_display
-	local tty_number=$(fgconsole)
+	local tty_number
+	tty_number=$(fgconsole)
 	echo "Calculated display $FREE_DISPLAY and TTY $tty_number"
 
 	echo "Adding $LIBRARY_PATHS to ldconfig paths"
