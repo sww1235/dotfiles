@@ -21,9 +21,9 @@ export PAGER=less
 if [ "$PROFILE_SHELL" = "sh" ]; then
 
 	# set ENV to a file invoked each time sh is started for interactive use.
-	ENV=$HOME/.shrc
+	ENV="$HOME/.shrc"
 	export ENV
-	. $HOME/.aliases.sh 
+	. "$HOME/.aliases.sh" 
 
 	# Let sh(1) know it's at home, despite /home being a symlink.
 	# shellcheck disable=SC2164,SC3013 # ignore CD issue and -ef posix compliance
@@ -32,8 +32,8 @@ if [ "$PROFILE_SHELL" = "sh" ]; then
 
 elif [ "$PROFILE_SHELL" = "bash" ]; then
 	
-	. $HOME/.bashrc
-	. $HOME/.aliases.sh 
+	. "$HOME/.bashrc"
+	. "$HOME/.aliases.sh" 
 fi
 
 

@@ -63,7 +63,7 @@ activate_gpu() {
 	# load additional modules
 	for module in "${MODULES_LOAD[@]}"; do
 		echo "Loading module $module"
-		sudo modprobe $module || return 1
+		sudo modprobe "$module" || return 1
 	done
 }
 
@@ -73,7 +73,7 @@ deactivate_gpu() {
 	if [[ $error -lt 2 ]]; then
 		for module in "${MODULES_UNLOAD[@]}"; do
 			echo "Unloading module $module"
-			sudo modprobe -r $module
+			sudo modprobe -r "$module"
 		done
 		echo ""
 	fi
@@ -111,7 +111,7 @@ run_x() {
 	echo "Calculated display $FREE_DISPLAY and TTY $tty_number"
 
 	echo "Adding $LIBRARY_PATHS to ldconfig paths"
-	sudo ldconfig $LIBRARY_PATHS
+	sudo ldconfig "$LIBRARY_PATHS"
 
 	echo "Running X"
 	xinit "$XINITRC_PATH" "$wm" nvidia -- $FREE_DISPLAY "vt$tty_number" -nolisten tcp -br -config "$CONFIG_PATH" -configdir "$CONFIGDIR_PATH"

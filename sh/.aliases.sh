@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ -e "$HOME/.aliases-mac.sh" ]; then
 	. "$HOME/.aliases-mac.sh"

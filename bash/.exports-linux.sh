@@ -2,13 +2,13 @@
 
 # setting up default editor
 export VISUAL=vim
-export EDITOR=$VISUAL
+export EDITOR="$VISUAL"
 
 
 
 # Go related stuff
-export GOPATH=$HOME/projects
-export PATH=$PATH;$GOPATH/bin
+export GOPATH="$HOME/projects"
+export PATH="$PATH;$GOPATH/bin"
 
 
 eval "$(thefuck --alias)"

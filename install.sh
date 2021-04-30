@@ -51,6 +51,7 @@ install_profile (){
 
 install_bash (){
 	install_profile
+	# shellcheck disable=SC2181
 	if [ "$?" -ne 0 ]; then
 		echo ".profile failed to install. Fix issue and rerun install script."
 		return 1
@@ -86,6 +87,7 @@ install_bash (){
 
 install_sh (){
 	install_profile
+	# shellcheck disable=SC2181
 	if [ "$?" -ne 0 ]; then
 		echo ".profile failed to install. Fix issue and rerun install script."
 		return 1
