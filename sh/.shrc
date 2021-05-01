@@ -1,1 +1,10 @@
 #!/bin/sh
+
+# no need to check if this is running interactively
+# since $ENV is only used with interactive shell
+# sessions
+PS1="\u@\h:\W"
+case `id -u` in
+	0) PS1="${PS1}# ";;
+	*) PS1="${PS1}Ω ";;
+esac

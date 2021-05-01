@@ -3,7 +3,7 @@
 [[ $- != *i* ]] && return
 
 
-PS1='[\u@\h \W]Ω '
+PS1='\u@\h:\WΩ '
 
 
 eval "$(thefuck --alias)"
