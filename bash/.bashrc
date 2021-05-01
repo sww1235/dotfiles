@@ -11,4 +11,5 @@ eval "$(thefuck --alias)"
 # source ssh-agent file
 # mainly for void linux
 
-[ -f "$HOME/.ssh/ssh-agent-env" ] && source $HOME/.ssh/ssh-agent-env
+# shellcheck ignore=1091
+[ -f "$HOME/.ssh/ssh-agent-env" ] && source "$HOME/.ssh/ssh-agent-env"
