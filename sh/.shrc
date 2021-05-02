@@ -8,3 +8,6 @@ case `id -u` in
 	0) PS1="${PS1}# ";;
 	*) PS1="${PS1}Ω ";;
 esac
+
+# shellcheck source=./sh/.aliases.sh
+	. "$HOME/.aliases.sh"

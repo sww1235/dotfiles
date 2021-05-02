@@ -23,8 +23,6 @@ if [ "$PROFILE_SHELL" = "sh" ]; then
 	# set ENV to a file invoked each time sh is started for interactive use.
 	ENV="$HOME/.shrc"
 	export ENV
-	# shellcheck source=./sh/.aliases.sh
-	. "$HOME/.aliases.sh" 
 
 	# Let sh(1) know it's at home, despite /home being a symlink.
 	# shellcheck disable=SC2164,SC3013 # ignore CD issue and -ef posix compliance
@@ -35,8 +33,6 @@ elif [ "$PROFILE_SHELL" = "bash" ]; then
 	
 	# shellcheck source=./bash/.bashrc
 	. "$HOME/.bashrc"
-	# shellcheck source=./bash/.aliases.sh
-	. "$HOME/.aliases.sh" 
 fi
 
 

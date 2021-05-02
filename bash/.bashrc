@@ -5,6 +5,9 @@
 
 PS1='\u@\h:\WΩ '
 
+# shellcheck source=./bash/.aliases.sh
+	. "$HOME/.aliases.sh" 
+
 
 eval "$(thefuck --alias)"
 
