@@ -23,7 +23,7 @@ set backspace=indent,eol,start
 
 set number              " show line numbers
 set wrap                " wrap lines
-set encoding=utf-8      " set encoding to UTF-8 
+set encoding=utf-8      " set encoding to UTF-8
 set lazyredraw          " redraw screen only when we need to
 set showmatch           " highlight matching parentheses / brackets [{()}]
 set laststatus=2        " always show statusline (even with only single window)
@@ -46,31 +46,27 @@ colorscheme toxic
 " Only do this part when Vim was compiled with the +eval feature.
 if has("autocmd")
 
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  " Revert with ":filetype off".
-  filetype plugin indent on
-  set foldmethod=syntax
-  set nofoldenable
-
-  " Put these in an autocmd group, so that you can revert them with:
-  " ":augroup vimStartup | au! | augroup END"
-  augroup vimStartup
-    au!
-
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid, when inside an event handler
-    " (happens when dropping a file on gvim) and for a commit message (it's
-    " likely a different one than last time).
-    autocmd BufReadPost *
-      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-      \ |   exe "normal! g`\""
-      \ | endif
-
-  augroup END
-
+	" Enable file type detection.
+	" Use the default filetype settings, so that mail gets 'tw' set to 72,
+	" 'cindent' is on in C files, etc.
+	" Also load indent files, to automatically do language-dependent indenting.
+	" Revert with ":filetype off".
+	filetype plugin indent on
+	set foldmethod=syntax
+	set nofoldenable
+	" Put these in an autocmd group, so that you can revert them with:
+	" ":augroup vimStartup | au! | augroup END"
+	augroup vimStartup
+		au!
+		" When editing a file, always jump to the last known cursor position.
+		" Don't do it when the position is invalid, when inside an event handler
+		" (happens when dropping a file on gvim) and for a commit message (it's
+		" likely a different one than last time).
+		autocmd BufReadPost *
+		\ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+		\ |   exe "normal! g`\""
+		\ | endif
+	augroup END
 elseif
 	set noexpandtab
 	set tabstop=4
@@ -104,12 +100,12 @@ endif
 " Switch syntax highlighting on when the terminal has colors or when using the
 " GUI (which always has colors).
 if &t_Co > 2 || has("gui_running")
-  " Revert with ":syntax off".
-  syntax on
+	" Revert with ":syntax off".
+	syntax on
 
-  " I like highlighting strings inside C comments.
-  " Revert with ":unlet c_comment_strings".
-  let c_comment_strings=1
+	" I like highlighting strings inside C comments.
+	" Revert with ":unlet c_comment_strings".
+	let c_comment_strings=1
 endif
 
 
@@ -119,13 +115,21 @@ endif
 " Only define it when not defined already.
 " Revert with: ":delcommand DiffOrig".
 if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+	command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+		\ | wincmd p | diffthis
 endif
 
 if has('langmap') && exists('+langremap')
-  " Prevent that the langmap option applies to characters that result from a
-  " mapping.  If set (default), this may break plugins (but it's backward
-  " compatible).
-  set nolangremap
+	" Prevent that the langmap option applies to characters that result from a
+	" mapping.  If set (default), this may break plugins (but it's backward
+	" compatible).
+	set nolangremap
 endif
+
+" From https://github.com/dense-analysis/ale/README.md
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded
+" All messages and errors will be ignored
+silent! helptags ALL

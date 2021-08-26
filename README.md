@@ -1,7 +1,9 @@
 # dotfiles
 my dotfiles
 
-remember to clone with `--recurse-submodules -j8` to download vim packages
+remember to clone with `--recurse-submodules -j8` to download vim packages. If
+you forget then run `git submodule update --init --recursive` to bring in the
+submodules or update them.
 
 
 ## NOTES
@@ -11,7 +13,7 @@ so I can get nvidia cards working in void linux
 
 ## VIM specifics
 
-use `.vim/after/` directory to not override defaults for things like filetype plugins etc 
+use `.vim/after/` directory to not override defaults for things like filetype plugins etc
 
 ## SHELL specifics
 
