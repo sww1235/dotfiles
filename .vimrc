@@ -45,7 +45,6 @@ colorscheme toxic
 
 " Only do this part when Vim was compiled with the +eval feature.
 if has("autocmd")
-
 	" Enable file type detection.
 	" Use the default filetype settings, so that mail gets 'tw' set to 72,
 	" 'cindent' is on in C files, etc.
@@ -72,7 +71,6 @@ elseif
 	set tabstop=4
 	set shiftwidth=4
 	set softtabstop=0
-
 endif
 
 if has('reltime')	" need reltime to avoid vim hanging when typing search pattern
