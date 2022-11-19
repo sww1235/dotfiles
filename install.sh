@@ -60,7 +60,7 @@ install_bash (){
 	if [ -f "$HOME/.bash_profile" ]; then
 		mv "$HOME/.bash_profile" "$HOME/.bash_profile.old"
 	fi
-		
+
 	ln -sf "$PWD/bash/.bashrc" "$HOME"
 
 	ln -sf "$PWD/bash/.aliases.sh" "$HOME"
