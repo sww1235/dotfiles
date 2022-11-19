@@ -124,6 +124,9 @@ if has('langmap') && exists('+langremap')
 	set nolangremap
 endif
 
+" rust specific commands
+let g:rustfmt_autosave = 1
+
 " From https://github.com/dense-analysis/ale/README.md
 " Load all plugins now.
 " Plugins need to be added to runtimepath before helptags can be generated.
