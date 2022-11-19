@@ -66,7 +66,7 @@ if has("autocmd")
 		\ |   exe "normal! g`\""
 		\ | endif
 	augroup END
-elseif
+else
 	set noexpandtab
 	set tabstop=4
 	set shiftwidth=4
