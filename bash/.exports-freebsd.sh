@@ -7,6 +7,6 @@ export EDITOR="$VISUAL"
 
 # Go related stuff
 export GOPATH="$HOME/projects"
-export PATH="$PATH;$GOPATH/bin"
+export PATH="$PATH:$GOPATH/bin"
 
 
