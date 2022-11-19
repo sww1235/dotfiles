@@ -10,6 +10,12 @@ export EDITOR="$VISUAL"
 export GOPATH="$HOME/projects"
 export PATH="$PATH;$GOPATH/bin"
 
+# rust related stuff
+
+rustBin="$HOME/.cargo/bin"
+
+export PATH="$PATH;$rustBin"
+
 
 eval "$(thefuck --alias)"
 
