@@ -30,7 +30,7 @@ if [ "$PROFILE_SHELL" = "sh" ]; then
 
 
 elif [ "$PROFILE_SHELL" = "bash" ]; then
-	
+
 	# shellcheck source=./bash/.bashrc
 	. "$HOME/.bashrc"
 fi
