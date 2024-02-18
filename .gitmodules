@@ -13,6 +13,3 @@
 [submodule ".vim/pack/plugins/start/rust.vim"]
 	path = .vim/pack/plugins/start/rust.vim
 	url = git@github.com:rust-lang/rust.vim
-[submodule ".vim/pack/plugins/start/todo-vim"]
-	path = .vim/pack/plugins/start/todo-vim
-	url = git@github.com:sww1235/todo-vim.git
