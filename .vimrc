@@ -1,3 +1,4 @@
+" vim: set tabstop=4
 "" VIMRC file
 
 "" use Vim settings rather than Vi settings
@@ -21,22 +22,48 @@ set backspace=indent,eol,start
 
 " basic behavior
 
-set number              " show line numbers
-set wrap                " wrap lines
-set encoding=utf-8      " set encoding to UTF-8
-set lazyredraw          " redraw screen only when we need to
-set showmatch           " highlight matching parentheses / brackets [{()}]
-set laststatus=2        " always show statusline (even with only single window)
-set ruler               " show line and column number of the cursor on right side of statusline
-set visualbell          " blink cursor on error, instead of beeping
-set history=200		" keep 200 lines of command line history
-set showcmd		" display incomplete commands
+set autoread				" will automatically read files that change outside of vim but not inside
+set clipboard=unnamedplus,unnamed 	" merges vim yank register, and system clipboards
+set encoding=utf-8      		" set encoding to UTF-8
+set history=200				" keep 200 lines of command line history
+set laststatus=2        		" always show statusline (even with only single window)
+set lazyredraw          		" redraw screen only when we need to
+set matchpairs+=<:>			" add angle brackets to matchpairs
+set maxmempattern=5000			" increase the amount of memory available for pattern searching
+set number              		" show line numbers
+set ruler               		" show line and column number of the cursor on right side of statusline
+set scrolloff=5				" always show context lines around cursor. will scroll text
+set showcmd				" display incomplete commands
+set showmatch           		" highlight matching parentheses / brackets [{()}]
+set splitbelow				" when using :split, put the new window below the current one
+set splitright				" when using :vsplit, put the new window to the right of the current one
+set ttimeout				" time out for key codes
+set ttimeoutlen=100			" wait up to 100ms after Esc for special key
+set visualbell          		" blink cursor on error, instead of beeping
+set whichwrap=b,s,<,>,[,]		" which keys can move to next/previous line when on last/first character of line
 set wildmenu		" display completion matches in status line (part of Vim, not Vi)
+set wrap                " wrap lines
 
-set ttimeout		" time out for key codes
-set ttimeoutlen=100	" wait up to 100ms after Esc for special key
 
-set scrolloff=5		" always show context lines around cursor. will scroll text
+" https://github.com/nickjj/dotfiles/blob/d3c2b74f50e786edf78eceaa5359145f6f370eb3/.vimrc#L319C1-L322C18
+" Prevent x and the delete key from overriding what's in the clipboard.
+noremap x "_x
+noremap X "_x
+noremap <Del> "_x
+
+" https://github.com/nickjj/dotfiles/blob/d3c2b74f50e786edf78eceaa5359145f6f370eb3/.vimrc#L324C1-L325C16
+" Prevent selecting and pasting from overwriting what you originally copied.
+xnoremap p pgvy
+
+" https://github.com/nickjj/dotfiles/blob/d3c2b74f50e786edf78eceaa5359145f6f370eb3/.vimrc#L132C1-L139C6
+" Enable 24-bit true colors if your terminal supports it.
+if (has("termguicolors"))
+" https://github.com/vim/vim/issues/993#issuecomment-255651605
+   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+   set termguicolors
+endif
+
 
 " set colorscheme to my own
 colorscheme toxic
@@ -73,9 +100,47 @@ else
 	set softtabstop=0
 endif
 
+if has("autocmd")
+	" Auto-resize splits when Vim gets resized.
+	autocmd VimResized * wincmd =
+	" https://github.com/nickjj/dotfiles/blob/d3c2b74f50e786edf78eceaa5359145f6f370eb3/.vimrc#L410C1-L411C48
+	" Make sure .aliases, .bash_aliases and similar files get
+	syntax highlighting.
+	autocmd BufNewFile,BufRead .*aliases* set ft=sh
+	" https://github.com/nickjj/dotfiles/blob/d3c2b74f50e786edf78eceaa5359145f6f370eb3/.vimrc#L416C1-L417C43
+	" Ensure tabs don't get converted to spaces in Makefiles.
+	autocmd FileType make setlocal noexpandtab
+endif
+
 if has('reltime')	" need reltime to avoid vim hanging when typing search pattern
 	set incsearch
 endif
+
+" https://github.com/nickjj/dotfiles/blob/d3c2b74f50e786edf78eceaa5359145f6f370eb3/.vimrc#L441C1-L464C28
+" Allow files to be saved as root when forgetting to start Vim using sudo.
+command Sw :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
+" Add all TODO items to the quickfix list relative to where you opened Vim.
+function! s:todo() abort
+	let entries = []
+	for cmd in ['git grep -niIw -e TODO -e FIXME 2> /dev/null',
+			\ 'grep -rniIw -e TODO -e FIXME . 2> /dev/null']
+		let lines = split(system(cmd), '\n')
+		if v:shell_error != 0 | continue | endif
+		for line in lines
+			let [fname, lno, text] = matchlist(line,'^\([^:]*\):\([^:]*\):\(.*\)')[1:3]
+			call add(entries, { 'filename': fname, 'lnum': lno, 'text': text })
+		endfor
+		break
+	endfor
+
+	if !empty(entries)
+		call setqflist(entries)
+		copen
+	endif
+endfunction
+
+command! Todo call s:todo()
 
 " no octal number formats for ctrl-a and ctrl-x
 set nrformats-=octal
