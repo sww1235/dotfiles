@@ -16,6 +16,12 @@ rustBin="$HOME/.cargo/bin"
 
 export PATH="$rustBin:$PATH"
 
+# pipx related stuff
+
+pipxPath="$HOME/.local/bin"
+
+export PATH="$pipxPath:$PATH"
+
 
 eval "$(thefuck --alias)"
 
