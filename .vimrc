@@ -1,4 +1,4 @@
-" vim: set tabstop=4
+" vim: set tabstop=4 :
 "" VIMRC file
 
 "" use Vim settings rather than Vi settings
@@ -59,9 +59,9 @@ xnoremap p pgvy
 " Enable 24-bit true colors if your terminal supports it.
 if (has("termguicolors"))
 " https://github.com/vim/vim/issues/993#issuecomment-255651605
-   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-   set termguicolors
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	set termguicolors
 endif
 
 
@@ -104,8 +104,7 @@ if has("autocmd")
 	" Auto-resize splits when Vim gets resized.
 	autocmd VimResized * wincmd =
 	" https://github.com/nickjj/dotfiles/blob/d3c2b74f50e786edf78eceaa5359145f6f370eb3/.vimrc#L410C1-L411C48
-	" Make sure .aliases, .bash_aliases and similar files get
-	syntax highlighting.
+	" Make sure .aliases, .bash_aliases and similar files get syntax highlighting.
 	autocmd BufNewFile,BufRead .*aliases* set ft=sh
 	" https://github.com/nickjj/dotfiles/blob/d3c2b74f50e786edf78eceaa5359145f6f370eb3/.vimrc#L416C1-L417C43
 	" Ensure tabs don't get converted to spaces in Makefiles.
