@@ -10,7 +10,7 @@ PS1='\u@\h:\WΩ '
 
 
 
-eval "$(thefuck --alias)"
+# eval "$(thefuck --alias)"
 
 # source ssh-agent file
 # mainly for void linux
