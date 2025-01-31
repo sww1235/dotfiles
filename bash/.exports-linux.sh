@@ -23,5 +23,5 @@ pipxPath="$HOME/.local/bin"
 export PATH="$pipxPath:$PATH"
 
 
-eval "$(thefuck --alias)"
+# eval "$(thefuck --alias)"
 
