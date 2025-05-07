@@ -22,6 +22,9 @@ endif
 let colors_name = "toxic"
 
 "hi = highlight
+"cterm = console vim (set notermguicolors)
+"gui = gui vim or if set termguicolors and console is capable of supporting
+"TrueColor
 
 hi Normal	ctermfg=darkgreen ctermbg=black guifg=#007f00 guibg=#000000
 hi ErrorMsg	ctermfg=red ctermbg=white guifg=#FF0000 guibg=#FFFFFF
@@ -116,3 +119,5 @@ hi Underlined	ctermfg=160 cterm=underline guifg=#d70000 gui=underline term=under
 
 hi Ignore	ctermfg=bg guifg=bg
 
+" Markdown code span (between backticks)
+hi markdownCode	ctermfg=darkgrey guifg=#808080
