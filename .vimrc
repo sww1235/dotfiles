@@ -188,6 +188,10 @@ if has('langmap') && exists('+langremap')
 	set nolangremap
 endif
 
+" markdown specific commands
+let g:markdown_fenced_languages = ['html', 'conf', 'bash=sh', 'sh', 'rust', 'vim']
+
+
 " rust specific commands
 let g:rustfmt_autosave = 1
 
