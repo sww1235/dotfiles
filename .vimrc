@@ -157,6 +157,14 @@ if has('mouse')
 	set mouse=a
 endif
 
+" fixing issue with mouse not selecting things past 223rd column
+" https://github.com/vim/vim/issues/2309#issuecomment-343288543
+if has("mouse_sgr")
+		set ttymouse=sgr
+else
+		set ttymouse=xterm2
+end
+
 " from defaults.vim
 "
 " Switch syntax highlighting on when the terminal has colors or when using the
@@ -194,6 +202,13 @@ let g:markdown_fenced_languages = ['html', 'conf', 'bash=sh', 'sh', 'rust', 'vim
 
 " rust specific commands
 let g:rustfmt_autosave = 1
+let g:ale_rust_cargo_use_clippy = 1
+
+" turn off inline error messages
+let g:ale_virtualtext_cursor = 'disabled'
+
+let g:airline#extensions#ale#enabled = 1
+
 
 " From https://github.com/dense-analysis/ale/README.md
 " Load all plugins now.
