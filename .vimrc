@@ -203,6 +203,8 @@ let g:markdown_fenced_languages = ['html', 'conf', 'bash=sh', 'sh', 'rust', 'vim
 " rust specific commands
 let g:rustfmt_autosave = 1
 let g:ale_rust_cargo_use_clippy = 1
+let g:rust_fold = 1
+let g:rustfmt_command = 'cargo +nightly fmt'
 
 " turn off inline error messages
 let g:ale_virtualtext_cursor = 'disabled'
