@@ -22,3 +22,12 @@ use `.vim/after/` directory to not override defaults for things like filetype pl
 All login shell configuration is  in `.profile` (or equivalent file for `zsh`)
 
 All interactive shell configuration is in `.rc` files under the nominative directory of the shell.
+
+General flow of file sourcing is as follows:
+
+- `.profile`
+	- `.bashrc`
+		- `.aliases.sh`
+			- `aliases-*.sh`
+			- `exports-*.sh`
+	- other shell specific `rc` file
