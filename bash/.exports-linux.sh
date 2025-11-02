@@ -22,4 +22,5 @@ pipxPath="$HOME/.local/bin"
 
 export PATH="$pipxPath:$PATH"
 
-
+# fix for KiCAD dark mode, so I don't have to launch via a terminal every time
+export GTK_THEME=Adwaita:dark
