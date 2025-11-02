@@ -34,6 +34,7 @@ elif [ "$PROFILE_SHELL" = "bash" ]; then
 	# shellcheck source=./bash/.bashrc
 	. "$HOME/.bashrc"
 fi
+# TODO: Fix for other shells
 
 
 

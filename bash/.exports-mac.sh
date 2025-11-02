@@ -15,7 +15,3 @@ export PATH=$PATH:$GOPATH/bin
 
 export PATH=/usr/local/sbin:$PATH
 
-
-#The fuck command
-
-eval "$(thefuck --alias)"
