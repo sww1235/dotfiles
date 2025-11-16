@@ -197,7 +197,7 @@ if has('langmap') && exists('+langremap')
 endif
 
 " markdown specific commands
-let g:markdown_fenced_languages = ['html', 'conf', 'bash=sh', 'sh', 'rust', 'vim']
+let g:markdown_fenced_languages = ['html', 'conf', 'bash=sh', 'sh', 'rust', 'vim', 'toml']
 
 
 " rust specific commands
