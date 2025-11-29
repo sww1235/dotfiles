@@ -23,6 +23,7 @@ set backspace=indent,eol,start
 " basic behavior
 
 set autoread				" will automatically read files that change outside of vim but not inside
+set belloff=esc,showmatch " disables bell when hitting escape in normal mode, and when showmatch fails to find a match, such as when entering a > or :)
 set clipboard=unnamedplus,unnamed 	" merges vim yank register, and system clipboards
 set encoding=utf-8      		" set encoding to UTF-8
 set history=200				" keep 200 lines of command line history
@@ -201,10 +202,11 @@ let g:markdown_fenced_languages = ['html', 'conf', 'bash=sh', 'sh', 'rust', 'vim
 
 
 " rust specific commands
-let g:rustfmt_autosave = 1
+"let g:rustfmt_autosave = 1
 let g:ale_rust_cargo_use_clippy = 1
 let g:rust_fold = 1
-let g:rustfmt_command = 'cargo +nightly fmt'
+"let g:rustfmt_options = "+nightly"
+"let g:rustfmt_command = 'cargo +nightly fmt'
 
 " turn off inline error messages
 let g:ale_virtualtext_cursor = 'disabled'
