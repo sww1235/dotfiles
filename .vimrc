@@ -198,19 +198,16 @@ if has('langmap') && exists('+langremap')
 endif
 
 
-
-" rust specific commands
-"let g:rustfmt_autosave = 1
-let g:ale_rust_cargo_use_clippy = 1
-let g:rust_fold = 1
-"let g:rustfmt_options = "+nightly"
-"let g:rustfmt_command = 'cargo +nightly fmt'
-
 " turn off inline error messages
 let g:ale_virtualtext_cursor = 'disabled'
 
 let g:airline#extensions#ale#enabled = 1
 
+
+let g:termdebug_config = {}
+let g:termdebug_config['wide'] = 1
+
+packadd! termdebug
 
 " From https://github.com/dense-analysis/ale/README.md
 " Load all plugins now.
